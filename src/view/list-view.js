@@ -5,21 +5,19 @@ function createListTemplate() {
 }
 
 export default class ListView {
-  #element = null;
-
-  get template() {
+  getTemplate() {
     return createListTemplate();
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
+  getElement() {
+    if (!this.element) {
+      this.element = createElement(this.getTemplate());
     }
 
-    return this.#element;
+    return this.element;
   }
 
   removeElement() {
-    this.#element = null;
+    this.element = null;
   }
 }

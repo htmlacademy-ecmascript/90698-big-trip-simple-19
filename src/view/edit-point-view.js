@@ -98,26 +98,23 @@ function createEditPointTemplate(point) {
 }
 
 export default class EditPointView {
-  #element = null;
-  #point = null;
-
   constructor({point}) {
-    this.#point = point;
+    this.point = point;
   }
 
-  get template() {
-    return createEditPointTemplate(this.#point);
+  getTemplate() {
+    return createEditPointTemplate(this.point);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
+  getElement() {
+    if (!this.element) {
+      this.element = createElement(this.getTemplate());
     }
 
-    return this.#element;
+    return this.element;
   }
 
   removeElement() {
-    this.#element = null;
+    this.element = null;
   }
 }

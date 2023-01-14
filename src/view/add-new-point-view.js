@@ -107,26 +107,23 @@ function createAddNewPointTemplate(point) {
 }
 
 export default class AddNewPointView {
-  #element = null;
-  #point = null;
-
   constructor({point}) {
-    this.#point = point;
+    this.point = point;
   }
 
-  get template() {
-    return createAddNewPointTemplate(this.#point);
+  getTemplate() {
+    return createAddNewPointTemplate(this.point);
   }
 
-  get element() {
-    if (!this.#element) {
-      this.#element = createElement(this.template);
+  getElement() {
+    if (!this.element) {
+      this.element = createElement(this.getTemplate());
     }
 
-    return this.#element;
+    return this.element;
   }
 
   removeElement() {
-    this.#element = null;
+    this.element = null;
   }
 }
