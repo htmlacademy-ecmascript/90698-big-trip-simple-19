@@ -10,6 +10,10 @@ const POINTS_AMOUNT = {
   MAX: 6
 };
 
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+};
 
-export {CITY_NAMES, DESCRIPTION, TYPES, POINTS_AMOUNT};
+export {CITY_NAMES, DESCRIPTION, TYPES, POINTS_AMOUNT, FilterType};
 
