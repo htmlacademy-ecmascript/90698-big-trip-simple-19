@@ -12,7 +12,7 @@ const BLANK_FORM = {
   dateTo: new Date(),
   destination: 1,
   offers: [],
-  type: 'taxi'
+  type: TYPES[0]
 };
 
 
@@ -52,23 +52,16 @@ const createOffersTemplate = (offers, checkedOffers, isDisabled) => {
           </div>`).join('')}
         </div>
       </section>`);
-  } else {
-    return '';
   }
 };
 
-const createPhotosTemplate = (photos) => {
-  if (photos.length > 0) {
-    return (
-      ` <div class="event__photos-container">
+const createPhotosTemplate = (photos) => (
+  ` <div class="event__photos-container">
           <div class="event__photos-tape">
           ${photos.map(({src, description}) => `<img class="event__photo" src="${src}" alt="${description}">`).join('')}
           </div>
         </div>`);
-  } else {
-    return '';
-  }
-};
+
 
 const createDestinationTemplate = (destination) => {
   const photos = destination.pictures;
@@ -81,8 +74,6 @@ const createDestinationTemplate = (destination) => {
         <p class="event__destination-description">${description}</p>
         ${photosTemplate}
       </section>`);
-  } else {
-    return '';
   }
 };
 

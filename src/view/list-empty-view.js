@@ -6,23 +6,27 @@ const NoPointsTextType = {
   [FilterType.FUTURE]: 'There are no future events now'
 };
 
-function createListEmptyTemplate(filterType) {
+const isErrorMessage = 'Something went wrong<br>Please try again later';
+
+function createListEmptyTemplate(filterType, isError) {
   const noPointTextValue = NoPointsTextType[filterType];
   return (
-    `<p class="trip-events__msg">${noPointTextValue}</p>`
+    `<p class="trip-events__msg">${isError ? isErrorMessage : noPointTextValue}</p>`
   );
 }
 
 export default class ListEmptyView extends AbstractView {
   #filterType = null;
+  #isError = null;
 
-  constructor({filterType}) {
+  constructor({filterType, isError}) {
     super();
     this.#filterType = filterType;
+    this.#isError = isError;
   }
 
   get template() {
-    return createListEmptyTemplate(this.#filterType);
+    return createListEmptyTemplate(this.#filterType, this.#isError);
   }
 
 }

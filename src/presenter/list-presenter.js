@@ -44,6 +44,7 @@ export default class ListPresenter {
       onDestroy: onNewEventDestroy
     });
     this.#pointsModel.addObserver(this.#handleModelEvent);
+    this.#destinationsModel.addObserver(this.#handleModelEvent);
     this.#filterModel.addObserver(this.#handleModelEvent);
   }
 
@@ -129,6 +130,11 @@ export default class ListPresenter {
         remove(this.#loadingComponent);
         this.#renderBoard();
         break;
+      case UpdateType.ERROR:
+        this.#isLoading = false;
+        remove(this.#loadingComponent);
+        this.#renderNoPoints(true);
+        break;
     }
   };
 
@@ -146,11 +152,14 @@ export default class ListPresenter {
     render(this.#sortComponent, this.#boardContainer, RenderPosition.AFTERBEGIN);
   }
 
-  #renderNoPoints() {
-    this.#noPointComponent = new ListEmptyView ({
-      filterType: this.#filterType
-    });
-    render(this.#noPointComponent, this.#boardContainer, RenderPosition.AFTERBEGIN);
+  #renderNoPoints(error = false) {
+    if (!this.#noPointComponent) {
+      this.#noPointComponent = new ListEmptyView({
+        filterType: this.#filterType,
+        isError: error
+      });
+      render(this.#noPointComponent, this.#boardContainer, RenderPosition.AFTERBEGIN);
+    }
   }
 
   #renderPoint(point, destinations, offers) {
@@ -191,7 +200,7 @@ export default class ListPresenter {
     }
 
 
-    if (this.points.length === 0 || this.destinations.length === 0 || this.offers.length === 0) {
+    if (this.points.length === 0 || this.destinations.length === 0) {
       this.#renderNoPoints();
     } else {
       this.#renderSort(this.#currentSortType);
